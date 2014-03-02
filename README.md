@@ -11,4 +11,6 @@ To automatically unzip the original STIP features, after uncompressing the downl
 To extract STIP features for each video clip(by default all features of the videos in the same class are mixed in the same file), you also need to run script 
 	"mk_stip_data -i <in_dir> -o <out_dir>"
 
+Using this pipeline, the mean accuracy of UCF 101 action recognition should be no lower than 77.95%.
+
 For more details about this project, please refer to the STIP_fisher_report.pdf in this folder.
