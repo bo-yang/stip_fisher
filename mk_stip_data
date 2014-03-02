@@ -1,0 +1,55 @@
+#!/bin/bash
+
+# Separate STIP mixtures into actions and video clips
+
+function parse_stip_file {
+	input=$1
+
+	action=${input##*/}
+	action=${action%%.txt}
+	mkdir -p $outdir/$action
+	
+	file=
+	while read line
+	do
+		lead1=$(echo $line|cut -d" " -f1)
+		lead2=$(echo $line|cut -d" " -f2)
+		if [[ "$lead2" == UCF* ]]
+		then
+			# Extract file name
+			file="$outdir/$action/${line##*/}.stip"
+			> $file
+		elif [[ "$lead1" != \#* ]] && [ ! -z $file ]
+		then
+			# Write STIP features
+			echo $line >> $file
+		fi
+	done < $input
+
+}
+
+#######################################
+#	MAIN STARTS HERE
+#######################################
+indir=	# input dir
+outdir=
+
+while getopts i:o: c
+do
+	case ${c} in 
+	i) indir=${OPTARG};;
+	o) outdir=${OPTARG};;
+	?) # Unknown option
+		echo "mk_stip_data -i <in_dir> -o <out_dir>"
+		exit;;
+	esac
+done
+
+for file in $(ls $indir/*.txt)
+do
+	echo "Processing file ${file##*/} ..."
+	parse_stip_file $file 
+done
+
+wait
+echo "Done!"

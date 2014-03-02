@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# Extract DTF features for videos.
+# Command "realpath" is used in this tool. Please install it
+# first if you don't have it installed.
+
+indir=	# input dir
+
+while getopts i: c
+do
+	case ${c} in 
+	i) indir=${OPTARG};;
+	?) # Unknown option
+		echo "unzip_stip_files -i <in_dir>"
+		exit;;
+	esac
+done
+
+cd $indir
+for file in $(ls *.zip)
+do
+	echo "Processing file $file ..."
+	unzip $file 
+done
+
+echo "Done!"
