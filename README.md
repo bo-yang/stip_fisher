@@ -13,4 +13,4 @@ To extract STIP features for each video clip(by default all features of the vide
 
 Using this pipeline, the mean accuracy of UCF 101 action recognition should be no lower than 77.95%.
 
-For more details about this project, please refer to the STIP_fisher_report.pdf in this folder.
+For more details about this project, please refer to my blog [Action Recognition with Fisher Vectors](http://www.bo-yang.net/2014/04/30/fisher-vector-in-action-recognition/).
